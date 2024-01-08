@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac30dba6125cbdc41b282697eeadbcf6, type: 3}
+  m_Name: PlayerProjectile
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 179002823874840667, guid: e58dde7d698c38c4f834e51ec6972e27, type: 3}
+  initialSize: 10
+  scoreThreshold: 0
+  baseSpawnRate: 0
+  maxSpawnRate: 0
+  scoreForMaxRate: 0

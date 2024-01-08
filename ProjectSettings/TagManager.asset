@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Enemy
+  - Ground
+  - Projectile
+  - Asteroid
+  - Boundary
+  - Powerup
+  - Shieldup
+  - Deathzone
+  - Blackhole
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - Ground
+  - Background
+  - VFX
+  - 
+  - 
+  - 
+  - Blackhole
+  - Asteroid
+  - Enemy
+  - Player
+  - Shield
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Background
+    uniqueID: 4080215415
+    locked: 0
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Play
+    uniqueID: 1363474529
+    locked: 0
+  - name: Ground
+    uniqueID: 992478895
+    locked: 0
+  - name: VFX
+    uniqueID: 3128377749
+    locked: 0
