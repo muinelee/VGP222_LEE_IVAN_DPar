@@ -674,6 +674,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 353865344864450169, guid: f6650682bc23eba40ad1fc7568be1f34, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 353865344864450169, guid: f6650682bc23eba40ad1fc7568be1f34, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 353865344864450169, guid: f6650682bc23eba40ad1fc7568be1f34, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 353865344864450169, guid: f6650682bc23eba40ad1fc7568be1f34, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2000970035372907399, guid: f6650682bc23eba40ad1fc7568be1f34, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -813,6 +829,20 @@ PrefabInstance:
     - target: {fileID: 7100427108495712597, guid: f6650682bc23eba40ad1fc7568be1f34, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8293001513289690765, guid: f6650682bc23eba40ad1fc7568be1f34, type: 3}
+      propertyPath: m_text
+      value: '- DAILY CHALLENGE -
+
+        TEXT'
+      objectReference: {fileID: 0}
+    - target: {fileID: 8293001513289690765, guid: f6650682bc23eba40ad1fc7568be1f34, type: 3}
+      propertyPath: m_fontSize
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 8293001513289690765, guid: f6650682bc23eba40ad1fc7568be1f34, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 75
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
