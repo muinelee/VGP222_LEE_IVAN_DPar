@@ -20,10 +20,12 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private GameObject settingsMenu;
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private GameObject gameOverMenu;
+    [SerializeField] private GameObject shopMenu;
 
     [Header("Main Menu Buttons")]
     [SerializeField] private Button mm_PlayButton;
     [SerializeField] private Button mm_SettingsButton;
+    [SerializeField] private Button mm_ShopButton;
     [SerializeField] private Button mm_QuitButton;
 
     [Header("Pause Menu Buttons")]
@@ -37,6 +39,11 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private Button go_SettingsButton;
     [SerializeField] private Button go_MainMenuButton;
     [SerializeField] private Button go_QuitButton;
+
+    [Header("Shop Menu Buttons")]
+    [SerializeField] private Button sh_NextButton;
+    [SerializeField] private Button sh_PreviousButton;
+    [SerializeField] private Button sh_CloseButton;
 
     [Header("Settings Menu Buttons, Sliders, Texts")]
     [SerializeField] private Button closeButton;
@@ -107,6 +114,7 @@ public class MenuManager : MonoBehaviour
 
         mm_PlayButton.onClick.AddListener(PlayGame);
         mm_SettingsButton.onClick.AddListener(ActivateSettingsMenu);
+        mm_ShopButton.onClick.AddListener(ActivateShopMenu);
         mm_QuitButton.onClick.AddListener(QuitGame);
 
         pm_ResumeButton.onClick.AddListener(ResumeGame);
@@ -118,6 +126,10 @@ public class MenuManager : MonoBehaviour
         go_SettingsButton.onClick.AddListener(ActivateSettingsMenu);
         go_MainMenuButton.onClick.AddListener(GoToMainMenu);
         go_QuitButton.onClick.AddListener(QuitGame);
+
+        sh_NextButton.onClick.AddListener(NextCharacter);
+        sh_PreviousButton.onClick.AddListener(PreviousCharacter);
+        sh_CloseButton.onClick.AddListener(CloseShop);
 
         closeButton.onClick.AddListener(Close);
     }
@@ -159,6 +171,7 @@ public class MenuManager : MonoBehaviour
         mainMenu.SetActive(false);
         settingsMenu.SetActive(false);
         pauseMenu.SetActive(false);
+        shopMenu.SetActive(false);
         hud.SetActive(false);
     }
 
@@ -166,6 +179,7 @@ public class MenuManager : MonoBehaviour
     {
         mainMenu.SetActive(true);
         settingsMenu.SetActive(false);
+        shopMenu.SetActive(false);
         pauseMenu.SetActive(false);
     }
 
@@ -188,11 +202,28 @@ public class MenuManager : MonoBehaviour
         }
     }
 
+    private void ActivateShopMenu()
+    {
+        if (mainMenu.activeSelf)
+        {
+            lastActiveMenu = mainMenu;
+            ToggleMenu(mainMenu, shopMenu);
+        }
+    }
+
     private void Close()
     {
         if (settingsMenu.activeSelf && lastActiveMenu != null)
         {
             ToggleMenu(settingsMenu, lastActiveMenu);        
+        }
+    }
+
+    private void CloseShop()
+    {
+        if (shopMenu.activeSelf && lastActiveMenu != null)
+        {
+            ToggleMenu(shopMenu, lastActiveMenu);
         }
     }
 
@@ -262,6 +293,16 @@ public class MenuManager : MonoBehaviour
     {
         TimeSpan timeSpan = TimeSpan.FromSeconds(elapsedTime);
         timeText.text = "TIME\n" + string.Format("{0:D2}:{1:D2}", timeSpan.Minutes, timeSpan.Seconds);
+    }
+
+    private void PreviousCharacter()
+    {
+        throw new NotImplementedException();
+    }
+
+    private void NextCharacter()
+    {
+        throw new NotImplementedException();
     }
 
     private void QuitGame()
