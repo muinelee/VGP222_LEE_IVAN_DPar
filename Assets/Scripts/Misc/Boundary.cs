@@ -21,7 +21,7 @@ public class Boundary : MonoBehaviour
             return;
         }
 
-        if (collision.CompareTag("Asteroid") || collision.CompareTag("Projectile") || collision.CompareTag("Enemy") || collision.CompareTag("Powerup"))
+        if (collision.CompareTag("Asteroid") || collision.CompareTag("Projectile") || collision.CompareTag("Enemy") || collision.CompareTag("Powerup") || collision.CompareTag("Blackhole"))
         {
             var poolable = collision.GetComponent<PoolableGameObject>();
             if (poolable)
