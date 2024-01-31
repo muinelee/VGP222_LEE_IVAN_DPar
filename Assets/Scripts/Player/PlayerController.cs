@@ -6,16 +6,18 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    public GameObject destructionFX;
-    public GameObject shield;
-
     public static PlayerController Instance;
 
+    public GameObject currentShip;
+    private BaseShip baseShip;
+
+    [Header("Ship Database")]
+    public ShipDatabase shipDB;
+    private int selectedShip = 0;
+
+    [Header("Ship Movement")]
     private Vector3 targetPosition;
     private bool touchActive = false;
-
-    public float moveSpeed = 10.0f;
-    public float shieldDuration = 10.0f;
 
     private void Awake()
     {
@@ -27,6 +29,8 @@ public class PlayerController : MonoBehaviour
 
     public void Start()
     {
+        LoadSelectedShip();
+
         InputManager.OnStartTouch += StartMovement;
         InputManager.OnEndTouch += StopMovement;
     }
@@ -39,13 +43,30 @@ public class PlayerController : MonoBehaviour
 
     public void Update()
     {
-        if (touchActive)
+        if (currentShip != null && touchActive)
         {
-            // Update the target position with the current primary touch position
-            targetPosition = new Vector3(InputManager.Instance.PrimaryPosition().x, InputManager.Instance.PrimaryPosition().y, transform.position.z);
+            float moveSpeed = baseShip.moveSpeed;
 
-            // Ensure the game object is always moving towards the updated target position
-            transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
+            targetPosition = new Vector3(InputManager.Instance.PrimaryPosition().x, InputManager.Instance.PrimaryPosition().y, currentShip.transform.position.z);
+            currentShip.transform.position = Vector3.MoveTowards(currentShip.transform.position, targetPosition, moveSpeed * Time.deltaTime);
+        }
+    }
+
+    private void LoadSelectedShip()
+    {
+        int selectedShipIndex = PlayerPrefs.GetInt("SelectedShip", 0);
+        ShipSelect selectedShipData = shipDB.GetShip(selectedShipIndex);
+
+        if (selectedShipData.shipPrefab != null)
+        {
+            if (currentShip != null) Destroy(currentShip);
+
+            currentShip = Instantiate(selectedShipData.shipPrefab);
+            baseShip = currentShip.GetComponent<BaseShip>(); // Get the ship's script component
+        }
+        else
+        {
+            Debug.LogError("The ship prefab is not assigned in the ShipSelect object.");
         }
     }
 
@@ -57,42 +78,5 @@ public class PlayerController : MonoBehaviour
     void StopMovement(Vector2 pos, float time)
     {
         touchActive = false;
-    }
-
-    public void GetDamage(int damage)
-    {
-        Destruction();
-    }
-
-    public void ActivateShield()
-    {
-        shield.SetActive(true);
-        StartCoroutine(DeactivateShield(shieldDuration));
-    }
-
-    private IEnumerator DeactivateShield(float duration)
-    {
-        yield return new WaitForSeconds(duration);
-        shield.SetActive(false);
-    }
-
-    public void Destruction()
-    {
-        if (GameManager.Instance != null)
-        {
-            GameManager.Instance.StartCoroutine(CallGameOver());
-        }
-        else
-        {
-            Debug.Log("GameManager.Instance is null");
-        }
-        Instantiate(destructionFX, transform.position, Quaternion.identity);
-        Destroy(gameObject);
-    }
-
-    IEnumerator CallGameOver()
-    {
-        yield return new WaitForSeconds(1.5f);
-        GameManager.Instance.GameOver();
     }
 }

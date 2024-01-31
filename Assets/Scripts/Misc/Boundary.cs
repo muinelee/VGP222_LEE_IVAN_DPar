@@ -17,7 +17,7 @@ public class Boundary : MonoBehaviour
 
         if (collision.CompareTag("Player"))
         {
-            collision.gameObject.GetComponent<PlayerController>().Destruction();
+            collision.gameObject.GetComponent<BaseShip>().Destruction();
             return;
         }
 

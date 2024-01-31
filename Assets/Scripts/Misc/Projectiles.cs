@@ -7,6 +7,7 @@ public class Projectiles : MonoBehaviour
     public int damage;
     public bool enemyBullet;
     public PoolManager pm; // Make sure to assign this in the inspector!
+    private BaseShip bs;
 
     private void Awake()
     {
@@ -17,7 +18,7 @@ public class Projectiles : MonoBehaviour
     {
         if (enemyBullet && collision.CompareTag("Player"))
         {
-            PlayerController.Instance.GetDamage(damage);
+            bs.GetDamage(damage);
             Destruction(); // Call Destruction directly without checking destroyedByCollision
         }
         else if (collision.CompareTag("Asteroid"))

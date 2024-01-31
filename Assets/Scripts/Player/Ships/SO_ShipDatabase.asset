@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d5a407c945e19044b7e74cb57e51524, type: 3}
+  m_Name: SO_ShipDatabase
+  m_EditorClassIdentifier: 
+  ship:
+  - shipPrefab: {fileID: 7945650390444944112, guid: bff56201ca8807f40806fbd7d84bd841, type: 3}
+    shipSprite: {fileID: 21300000, guid: d44bb33a46048bb4cb4f8ebb557e17a1, type: 3}
+    shipName: AZURE
+    shipCost: 0
+    purchased: 1
+  - shipPrefab: {fileID: 7945650390444944112, guid: 82585d6ec069d534c94d22b03d39d04d, type: 3}
+    shipSprite: {fileID: 21300000, guid: 65d505785a12c874cae74de2ed48e4fd, type: 3}
+    shipName: SAGE
+    shipCost: 1000
+    purchased: 0
+  - shipPrefab: {fileID: 7945650390444944112, guid: d7c2cdb591acd0f43a043a9f280020ea, type: 3}
+    shipSprite: {fileID: 21300000, guid: 29f2043d35816e240ad8e8a9f3d05d5d, type: 3}
+    shipName: VIRIDIAN
+    shipCost: 2500
+    purchased: 0
+  - shipPrefab: {fileID: 7945650390444944112, guid: 79e5bb35bf4c41c45bc446310994ac29, type: 3}
+    shipSprite: {fileID: 21300000, guid: 9a025ac2644382d4e8e36e449a42bbc8, type: 3}
+    shipName: CRIMSON
+    shipCost: 5000
+    purchased: 0

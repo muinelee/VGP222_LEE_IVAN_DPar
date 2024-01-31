@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyTeal : Enemy
 {
-    public Transform playerTransform;
+    private Transform playerTransform;
     public float followSpeed = 10.0f;
 
     protected override void Awake()

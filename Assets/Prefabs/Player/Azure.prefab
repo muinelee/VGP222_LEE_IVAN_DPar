@@ -237,10 +237,10 @@ GameObject:
   - component: {fileID: 7921857744594472257}
   - component: {fileID: 5078955372594738614}
   - component: {fileID: 4433691348751970622}
-  - component: {fileID: 5677986074113188513}
   - component: {fileID: 259022369459753644}
+  - component: {fileID: 3679621936089542502}
   m_Layer: 15
-  m_Name: Player
+  m_Name: Azure
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -379,21 +379,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &5677986074113188513
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7945650390444944112}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d55dbbb5ae4f5141aa6b1a2d5fed440, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  destructionFX: {fileID: 555119881895552728, guid: df95a88879ecd4b4b8b68c2aa891e141, type: 3}
-  shield: {fileID: 3861704362719106337}
-  moveSpeed: 10
 --- !u!114 &259022369459753644
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -415,6 +400,22 @@ MonoBehaviour:
     cGun: {fileID: 6959676545693355076}
     rGun: {fileID: 3748808550127899371}
   pm: {fileID: 0}
+--- !u!114 &3679621936089542502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7945650390444944112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3304e0e48334b9246a3c15c89e44853d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 10
+  shieldDuration: 10
+  destructionFX: {fileID: 555119881895552728, guid: df95a88879ecd4b4b8b68c2aa891e141, type: 3}
+  shield: {fileID: 3861704362719106337}
 --- !u!1 &8634678842378126084
 GameObject:
   m_ObjectHideFlags: 0

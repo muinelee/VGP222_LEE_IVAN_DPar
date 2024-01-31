@@ -297,12 +297,14 @@ public class MenuManager : MonoBehaviour
 
     private void PreviousCharacter()
     {
-        throw new NotImplementedException();
+        // Access the ship manager method for previous character
+
     }
 
     private void NextCharacter()
     {
-        throw new NotImplementedException();
+        // Access the ShipManager script method for next character
+
     }
 
     private void QuitGame()

@@ -15,7 +15,7 @@ public class ShieldupScript : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            collision.gameObject.GetComponent<PlayerController>().ActivateShield();
+            collision.gameObject.GetComponent<BaseShip>().ActivateShield();
 
             ReturnToPool();
         }
