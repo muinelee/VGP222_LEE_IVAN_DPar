@@ -14,9 +14,19 @@ public class ShipManager : MonoBehaviour
 
     private int selectedShip = 0;
 
+    private PlayerCreditsManager playerCredits;
+
     // Start is called before the first frame update
     void Start()
     {
+        playerCredits = FindObjectOfType<PlayerCreditsManager>();
+
+        for (int i = 0; i < shipDB.ShipCount; i++)
+        {
+            ShipSelect ship = shipDB.GetShip(i);
+            ship.purchased = PlayerPrefs.GetInt("ShipPurchased_" + i, 0) == 1;
+        }
+
         if (!PlayerPrefs.HasKey("SelectedShip"))
         {
             selectedShip = 0;
@@ -28,6 +38,7 @@ public class ShipManager : MonoBehaviour
 
         UpdateShip(selectedShip);
     }
+
 
     public void NextOption()
     {
@@ -72,4 +83,19 @@ public class ShipManager : MonoBehaviour
     {
         PlayerPrefs.SetInt("SelectedShip", selectedShip);
     }
+
+    public void PurchaseShip()
+    {
+        ShipSelect ship = shipDB.GetShip(selectedShip);
+        if (!ship.purchased && playerCredits.SpendCredits(ship.shipCost))
+        {
+            ship.purchased = true;
+            PlayerPrefs.SetInt("ShipPurchased_" + selectedShip, ship.purchased ? 1 : 0);
+        }
+        else
+        {
+            // Insufficient funds message
+        }
+    }
+
 }
