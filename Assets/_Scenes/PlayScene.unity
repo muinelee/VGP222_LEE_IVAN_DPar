@@ -1252,7 +1252,7 @@ GameObject:
   - component: {fileID: 902601645}
   m_Layer: 0
   m_Name: PlayerController
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2223,14 +2223,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameObjectSpawner
       objectReference: {fileID: 0}
-    - target: {fileID: 924188592383053382, guid: 6f53c6a7d9fe30b4ea981f5de4e88bb3, type: 3}
-      propertyPath: poolConfigs.Array.size
-      value: 11
-      objectReference: {fileID: 0}
-    - target: {fileID: 924188592383053382, guid: 6f53c6a7d9fe30b4ea981f5de4e88bb3, type: 3}
-      propertyPath: poolConfigs.Array.data[10]
-      value: 
-      objectReference: {fileID: 11400000, guid: d00007c15c41e54418946efc167da684, type: 2}
     - target: {fileID: 3573086133615173435, guid: 6f53c6a7d9fe30b4ea981f5de4e88bb3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

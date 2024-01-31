@@ -12,13 +12,12 @@ public class Enemy : MonoBehaviour, IResettable
 
     public GameObject destructionFX;
     public PoolManager pm;
-    private BaseShip bs;
 
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Player")
         {
-            bs.Destruction();
+            collision.gameObject.GetComponent<BaseShip>().Destruction();
         }
     }
 

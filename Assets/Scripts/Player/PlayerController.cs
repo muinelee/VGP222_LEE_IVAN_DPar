@@ -62,13 +62,15 @@ public class PlayerController : MonoBehaviour
             if (currentShip != null) Destroy(currentShip);
 
             currentShip = Instantiate(selectedShipData.shipPrefab);
-            baseShip = currentShip.GetComponent<BaseShip>(); // Get the ship's script component
+            baseShip = currentShip.GetComponent<BaseShip>();
+            currentShip.tag = "Player";
         }
         else
         {
             Debug.LogError("The ship prefab is not assigned in the ShipSelect object.");
         }
     }
+
 
     void StartMovement(Vector2 pos, float time)
     {
@@ -78,5 +80,10 @@ public class PlayerController : MonoBehaviour
     void StopMovement(Vector2 pos, float time)
     {
         touchActive = false;
+    }
+
+    public void SetMovementEnabled(bool enabled)
+    {
+        touchActive = enabled;
     }
 }

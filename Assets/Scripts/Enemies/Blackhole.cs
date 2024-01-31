@@ -7,10 +7,10 @@ public class Blackhole : MonoBehaviour
     // On player collision, disable player movement
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        PlayerController playerController = FindObjectOfType<PlayerController>();
+        if (playerController != null && playerController.currentShip == collision.gameObject)
         {
-            collision.gameObject.GetComponent<PlayerController>().enabled = false;
-            return;
+            playerController.SetMovementEnabled(false);
         }
     }
 }

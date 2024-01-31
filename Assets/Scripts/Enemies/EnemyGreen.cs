@@ -2,28 +2,30 @@ using UnityEngine;
 
 public class EnemyGreen : Enemy
 {
-    public Transform playerTransform;
-    public float followSpeed = 5.0f;
+    private Transform playerTransform;
+    public float followSpeed = 10.0f;
 
     protected override void Awake()
     {
         base.Awake();
-        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     void Update()
     {
+        FindPlayerShip();
         FollowPlayer();
     }
 
-    protected override void OnEnable()
+    void FindPlayerShip()
     {
-        base.OnEnable();
-    }
-
-    protected override void Destruction()
-    {
-        base.Destruction();
+        if (playerTransform == null)
+        {
+            PlayerController playerController = FindObjectOfType<PlayerController>();
+            if (playerController != null && playerController.currentShip != null)
+            {
+                playerTransform = playerController.currentShip.transform;
+            }
+        }
     }
 
     void FollowPlayer()
@@ -32,10 +34,7 @@ public class EnemyGreen : Enemy
         {
             Vector3 position = transform.position;
 
-            // Adjust position horizontally (X-axis) to follow the player
             position.x = Mathf.Lerp(position.x, playerTransform.position.x, Time.deltaTime * followSpeed);
-
-            // Move downwards on the Y-axis
             position.y -= Time.deltaTime * followSpeed;
 
             transform.position = position;

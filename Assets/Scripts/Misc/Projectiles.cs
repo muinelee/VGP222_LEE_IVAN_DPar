@@ -7,19 +7,26 @@ public class Projectiles : MonoBehaviour
     public int damage;
     public bool enemyBullet;
     public PoolManager pm; // Make sure to assign this in the inspector!
-    private BaseShip bs;
+    public BaseShip bs;
 
     private void Awake()
     {
         pm = FindObjectOfType<PoolManager>();
+        bs = gameObject.GetComponent<BaseShip>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (enemyBullet && collision.CompareTag("Player"))
+        PlayerController playerController = FindObjectOfType<PlayerController>();
+
+        if (enemyBullet && playerController != null && collision.gameObject == playerController.currentShip)
         {
-            bs.GetDamage(damage);
-            Destruction(); // Call Destruction directly without checking destroyedByCollision
+            BaseShip ship = playerController.currentShip.GetComponent<BaseShip>();
+            if (ship != null)
+            {
+                ship.GetDamage(damage);
+            }
+            Destruction();
         }
         else if (collision.CompareTag("Asteroid"))
         {

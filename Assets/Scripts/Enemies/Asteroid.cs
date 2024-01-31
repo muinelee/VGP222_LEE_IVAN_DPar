@@ -12,13 +12,12 @@ public class Asteroid : MonoBehaviour, IResettable
 
     public GameObject destructionFX;
     public PoolManager pm;
-    private BaseShip bs;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Player")
-        {            
-            bs.GetDamage(damage);
+        {
+            collision.gameObject.GetComponent<BaseShip>().Destruction();
         }
     }
 
