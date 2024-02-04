@@ -13,8 +13,6 @@ public class InputManager : Singleton<InputManager>
 
     [HideInInspector] public PlayerInputActions input;
 
-    [SerializeField] private PlayerController pc;
-
     protected override void Awake()
     {
         base.Awake();
@@ -29,7 +27,10 @@ public class InputManager : Singleton<InputManager>
 
     private void OnDisable()
     {
-        input.Disable();
+        if (input != null)
+        {
+            input.Disable();
+        }
     }
 
     public Vector2 PrimaryPosition()
@@ -51,8 +52,11 @@ public class InputManager : Singleton<InputManager>
 
     private void OnDestroy()
     {
-        input.Mobile.PrimaryContact.started -= ctx => StartTouchPrimary(ctx);
-        input.Mobile.PrimaryContact.canceled -= ctx => EndTouchPrimary(ctx);
+        if (input != null)
+        {
+            input.Mobile.PrimaryContact.started -= ctx => StartTouchPrimary(ctx);
+            input.Mobile.PrimaryContact.canceled -= ctx => EndTouchPrimary(ctx);
+        }
     }
 
     void StartTouchPrimary(InputAction.CallbackContext ctx)
