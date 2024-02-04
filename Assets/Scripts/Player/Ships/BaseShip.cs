@@ -29,7 +29,10 @@ public class BaseShip : MonoBehaviour
 
     public void Destruction()
     {
-        if (GameManager.Instance != null)
+        Instantiate(destructionFX, transform.position, Quaternion.identity);
+        Destroy(gameObject);
+
+        if (GameManager.Instance != null && GameManager.Instance.CurrentGameState == GameState.PLAY)
         {
             GameManager.Instance.StartCoroutine(CallGameOver());
         }
@@ -37,8 +40,6 @@ public class BaseShip : MonoBehaviour
         {
             Debug.Log("GameManager.Instance is null");
         }
-        Instantiate(destructionFX, transform.position, Quaternion.identity);
-        Destroy(gameObject);
     }
 
     IEnumerator CallGameOver()
