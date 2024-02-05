@@ -6,6 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
+    [Header("References")]
+    [SerializeField] private ShipManager shipManager;
+
     [Header("HUD")]
     [SerializeField] private GameObject hud;
 
@@ -41,9 +44,10 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private Button go_QuitButton;
 
     [Header("Shop Menu Buttons")]
-    [SerializeField] private Button sh_NextButton;
-    [SerializeField] private Button sh_PreviousButton;
     [SerializeField] private Button sh_CloseButton;
+
+    [Header("Reset Button")]
+    [SerializeField] private Button resetButton;
 
     [Header("Settings Menu Buttons, Sliders, Texts")]
     [SerializeField] private Button closeButton;
@@ -127,9 +131,9 @@ public class MenuManager : MonoBehaviour
         go_MainMenuButton.onClick.AddListener(GoToMainMenu);
         go_QuitButton.onClick.AddListener(QuitGame);
 
-        sh_NextButton.onClick.AddListener(NextCharacter);
-        sh_PreviousButton.onClick.AddListener(PreviousCharacter);
         sh_CloseButton.onClick.AddListener(CloseShop);
+
+        resetButton.onClick.AddListener(ResetPlayerPrefs);
 
         closeButton.onClick.AddListener(Close);
     }
@@ -251,9 +255,18 @@ public class MenuManager : MonoBehaviour
             HideAllMenus();
             hud.SetActive(true);
         }
-        else if (GameManager.Instance.CurrentGameState == GameState.MAIN || GameManager.Instance.CurrentGameState == GameState.GAMEOVER)
+        if (GameManager.Instance.CurrentGameState == GameState.MAIN || GameManager.Instance.CurrentGameState == GameState.GAMEOVER)
         {
-            GameManager.Instance.LoadPlayScene();
+            // Ensure the selected ship is properly set before starting the game
+            if (shipManager != null)
+            {
+                shipManager.LoadSelectedShipForGameplay(); // Check and load the appropriate ship
+            }
+
+            // Hide menus and load the play scene
+            HideAllMenus();
+            hud.SetActive(true);
+            GameManager.Instance.LoadPlayScene(); // Ensure this method exists in your GameManager
         }
     }
 
@@ -295,16 +308,9 @@ public class MenuManager : MonoBehaviour
         timeText.text = "TIME\n" + string.Format("{0:D2}:{1:D2}", timeSpan.Minutes, timeSpan.Seconds);
     }
 
-    private void PreviousCharacter()
+    private void ResetPlayerPrefs()
     {
-        // Access the ship manager method for previous character
-
-    }
-
-    private void NextCharacter()
-    {
-        // Access the ShipManager script method for next character
-
+        PlayerPrefs.DeleteAll();
     }
 
     private void QuitGame()

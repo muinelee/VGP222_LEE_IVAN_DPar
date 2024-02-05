@@ -54,23 +54,23 @@ public class PlayerController : MonoBehaviour
 
     private void LoadSelectedShip()
     {
-        int selectedShipIndex = PlayerPrefs.GetInt("SelectedShip", 0);
+        int selectedShipIndex = PlayerPrefs.GetInt("SelectedShip", 0); // Directly use the saved ship index
         ShipSelect selectedShipData = shipDB.GetShip(selectedShipIndex);
-
-        if (selectedShipData.shipPrefab != null)
+        if (selectedShipData != null && selectedShipData.shipPrefab != null)
         {
             if (currentShip != null) Destroy(currentShip);
 
-            currentShip = Instantiate(selectedShipData.shipPrefab);
+            Vector3 spawnPosition = new Vector3(transform.position.x, -7, transform.position.z);
+
+            currentShip = Instantiate(selectedShipData.shipPrefab, spawnPosition, Quaternion.identity);
             baseShip = currentShip.GetComponent<BaseShip>();
             currentShip.tag = "Player";
         }
         else
         {
-            Debug.LogError("The ship prefab is not assigned in the ShipSelect object.");
+            Debug.LogError("Selected ship prefab is missing or not found.");
         }
     }
-
 
     void StartMovement(Vector2 pos, float time)
     {
