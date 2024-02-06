@@ -2,6 +2,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using System.Collections;
 
 public class ShipManager : MonoBehaviour
 {
@@ -55,33 +56,73 @@ public class ShipManager : MonoBehaviour
         shipImage.sprite = ship.shipSprite;
         shipImage.color = purchasedShips.Contains(index) ? Color.white : Color.grey;
 
-        // Enable purchase button if the ship is not already purchased
-        purchaseButton.interactable = !purchasedShips.Contains(index);
+        // Check if the ship is already purchased
+        if (purchasedShips.Contains(index))
+        {
+            // Change button text to "PURCHASED" and disable it
+            purchaseButton.GetComponentInChildren<TMP_Text>().text = "PURCHASED";
+            purchaseButton.interactable = false;
+        }
+        else
+        {
+            // If not purchased, show "BUY" and enable the button
+            purchaseButton.GetComponentInChildren<TMP_Text>().text = "BUY";
+            purchaseButton.interactable = true;
+        }
     }
 
     public void PurchaseShip()
     {
         if (purchasedShips.Contains(selectedShipIndex))
         {
-            purchaseNotificationText.text = "Ship already purchased.";
+            ShowPurchasedNotification("Ship already purchased!");
             return;
         }
 
         ShipSelect ship = shipDB.GetShip(selectedShipIndex);
+
         if (playerCredits.SpendCredits(ship.shipCost))
         {
             purchasedShips.Add(selectedShipIndex);
             PlayerPrefs.SetInt($"ShipPurchased_{selectedShipIndex}", 1);
             DisplayShip(selectedShipIndex);
-            purchaseNotificationText.text = $"{ship.shipName} Purchased!";
+            ShowPurchasedNotification($"{ship.shipName} Purchased!");
         }
         else
         {
-            purchaseNotificationText.text = "Insufficient Credits.";
+            ShowPurchasedNotification("Insufficient Credits!");
         }
     }
 
-    // Call this function when transitioning to the gameplay scene
+    public void ShowPurchasedNotification(string message)
+    {
+        // Set the notification text and make it fully visible
+        purchaseNotificationText.text = message;
+        purchaseNotificationText.color = new Color(purchaseNotificationText.color.r, purchaseNotificationText.color.g, purchaseNotificationText.color.b, 1);
+
+        // Start the coroutine to fade out the notification
+        StartCoroutine(FadeTextToZeroAlpha(2.5f, purchaseNotificationText, 2.5f));
+    }
+
+    private IEnumerator FadeTextToZeroAlpha(float duration, TMP_Text text, float delayBeforeFadeStarts)
+    {
+        // Wait for the specified delay before starting the fade
+        yield return new WaitForSeconds(delayBeforeFadeStarts);
+
+        // Capture the original color of the text
+        Color originalColor = text.color;
+
+        for (float t = 0; t < 1; t += Time.deltaTime / duration)
+        {
+            // Gradually change the alpha value of the text color over the duration
+            text.color = new Color(originalColor.r, originalColor.g, originalColor.b, Mathf.Lerp(1, 0, t));
+            yield return null;
+        }
+
+        text.color = new Color(originalColor.r, originalColor.g, originalColor.b, 0); // Ensure it's fully transparent at the end
+    }
+
+    // Call this function before transitioning to the gameplay scene
     public void LoadSelectedShipForGameplay()
     {
         // If the last viewed ship is not purchased, load the default ship
