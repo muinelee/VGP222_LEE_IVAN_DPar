@@ -16,7 +16,6 @@ public class PlayerCreditsManager : MonoBehaviour
 
     public void AddCredits(int amount)
     {
-        Debug.Log($"Adding Credits: {credits}");
         credits += amount;
         SaveCredits();
         UpdateCreditsUI();

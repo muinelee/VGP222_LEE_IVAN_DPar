@@ -123,7 +123,6 @@ public class GameManager : Singleton<GameManager>
         CheckForHighScore();
 
         int creditsToAdd = CalculateCreditsBasedOnScore(Score);
-        Debug.Log($"Adding Credits: {creditsToAdd}");
         PlayerCreditsManager playerCreditsManager = FindObjectOfType<PlayerCreditsManager>();
         if (playerCreditsManager != null)
         {
