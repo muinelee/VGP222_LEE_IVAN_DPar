@@ -32,7 +32,7 @@ public class BaseShip : MonoBehaviour
         Instantiate(destructionFX, transform.position, Quaternion.identity);
         Destroy(gameObject);
 
-        if (GameManager.Instance != null && GameManager.Instance.CurrentGameState == GameState.PLAY)
+        if (gameObject.CompareTag("Player") && GameManager.Instance != null && GameManager.Instance.CurrentGameState == GameState.PLAY)
         {
             GameManager.Instance.StartCoroutine(CallGameOver());
         }

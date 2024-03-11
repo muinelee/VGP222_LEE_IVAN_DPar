@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerCreditsManager : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI creditsText;
-    public int credits;
+    private int credits;
 
     void Start()
     {
@@ -16,6 +16,7 @@ public class PlayerCreditsManager : MonoBehaviour
 
     public void AddCredits(int amount)
     {
+        Debug.Log($"Adding Credits: {credits}");
         credits += amount;
         SaveCredits();
         UpdateCreditsUI();

@@ -12,7 +12,6 @@ public enum GameState
 
 public class GameManager : Singleton<GameManager>
 {
-    //[SerializeField] private PlayerController pc;
     [SerializeField] private MenuManager mm;
 
     public int Score { get; set; }
@@ -88,7 +87,6 @@ public class GameManager : Singleton<GameManager>
         }
         else if (scene.name == "PlayScene")
         {
-            //pc = FindObjectOfType<PlayerController>();
             mm = FindObjectOfType<MenuManager>();
 
             ChangeGameState(GameState.PLAY);
@@ -117,12 +115,27 @@ public class GameManager : Singleton<GameManager>
 
     public void GameOver()
     {
+        if (_currentGameState == GameState.GAMEOVER) return;
+
         ChangeGameState(GameState.GAMEOVER);
         Time.timeScale = 0;
 
         CheckForHighScore();
 
+        int creditsToAdd = CalculateCreditsBasedOnScore(Score);
+        Debug.Log($"Adding Credits: {creditsToAdd}");
+        PlayerCreditsManager playerCreditsManager = FindObjectOfType<PlayerCreditsManager>();
+        if (playerCreditsManager != null)
+        {
+            playerCreditsManager.AddCredits(creditsToAdd);
+            mm.UpdateCreditsEarnedDisplay(creditsToAdd);
+        }
         OnGameStateChanged?.Invoke();
+    }
+
+    private int CalculateCreditsBasedOnScore(int score)
+    {
+        return Mathf.RoundToInt(score / 10);
     }
 
     public void AddScore(int points)

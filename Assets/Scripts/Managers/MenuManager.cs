@@ -42,6 +42,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private Button go_SettingsButton;
     [SerializeField] private Button go_MainMenuButton;
     [SerializeField] private Button go_QuitButton;
+    [SerializeField] private TMP_Text go_CreditsEarned;
 
     [Header("Shop Menu Buttons")]
     [SerializeField] private Button sh_CloseButton;
@@ -300,6 +301,11 @@ public class MenuManager : MonoBehaviour
     public void UpdateHighScoreDisplay(int highScore)
     {
         highScoreText.text = "HIGH SCORE\n" + highScore.ToString();
+    }
+
+    public void UpdateCreditsEarnedDisplay(int creditsEarned)
+    {
+        go_CreditsEarned.text = "CREDITS EARNED:\n" + creditsEarned.ToString();
     }
 
     private void UpdateTimeDisplay(float elapsedTime)

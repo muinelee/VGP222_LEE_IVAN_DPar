@@ -96,42 +96,35 @@ public class ShipManager : MonoBehaviour
 
     public void ShowPurchasedNotification(string message)
     {
-        // Set the notification text and make it fully visible
         purchaseNotificationText.text = message;
         purchaseNotificationText.color = new Color(purchaseNotificationText.color.r, purchaseNotificationText.color.g, purchaseNotificationText.color.b, 1);
 
-        // Start the coroutine to fade out the notification
         StartCoroutine(FadeTextToZeroAlpha(2.5f, purchaseNotificationText, 2.5f));
     }
 
     private IEnumerator FadeTextToZeroAlpha(float duration, TMP_Text text, float delayBeforeFadeStarts)
     {
-        // Wait for the specified delay before starting the fade
         yield return new WaitForSeconds(delayBeforeFadeStarts);
 
-        // Capture the original color of the text
         Color originalColor = text.color;
 
         for (float t = 0; t < 1; t += Time.deltaTime / duration)
         {
-            // Gradually change the alpha value of the text color over the duration
             text.color = new Color(originalColor.r, originalColor.g, originalColor.b, Mathf.Lerp(1, 0, t));
             yield return null;
         }
 
-        text.color = new Color(originalColor.r, originalColor.g, originalColor.b, 0); // Ensure it's fully transparent at the end
+        text.color = new Color(originalColor.r, originalColor.g, originalColor.b, 0);
     }
 
-    // Call this function before transitioning to the gameplay scene
     public void LoadSelectedShipForGameplay()
     {
         // If the last viewed ship is not purchased, load the default ship
         if (!purchasedShips.Contains(selectedShipIndex))
         {
-            selectedShipIndex = 0; // Default ship index
+            selectedShipIndex = 0;
         }
 
-        PlayerPrefs.SetInt("SelectedShip", selectedShipIndex); // Save the ship to be loaded in gameplay
-        // Here you would typically load the gameplay scene or ensure the game uses this selected ship
+        PlayerPrefs.SetInt("SelectedShip", selectedShipIndex);
     }
 }
