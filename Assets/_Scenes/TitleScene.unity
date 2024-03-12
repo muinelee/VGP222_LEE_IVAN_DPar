@@ -692,10 +692,6 @@ PrefabInstance:
       propertyPath: playerCredits
       value: 
       objectReference: {fileID: 1747687330}
-    - target: {fileID: 4804099570953297780, guid: f6650682bc23eba40ad1fc7568be1f34, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4952735123812266290, guid: f6650682bc23eba40ad1fc7568be1f34, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -776,6 +772,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5597606911272691922, guid: f6650682bc23eba40ad1fc7568be1f34, type: 3}
+      propertyPath: playerCreditsManager
+      value: 
+      objectReference: {fileID: 1747687330}
     - target: {fileID: 5676236211773464022, guid: f6650682bc23eba40ad1fc7568be1f34, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -850,10 +850,6 @@ PrefabInstance:
       objectReference: {fileID: 1747687330}
     - target: {fileID: 8220700845906493939, guid: f6650682bc23eba40ad1fc7568be1f34, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1747687330}
-    - target: {fileID: 8986311939712393127, guid: f6650682bc23eba40ad1fc7568be1f34, type: 3}
-      propertyPath: playerCreditsManager
       value: 
       objectReference: {fileID: 1747687330}
     m_RemovedComponents: []
