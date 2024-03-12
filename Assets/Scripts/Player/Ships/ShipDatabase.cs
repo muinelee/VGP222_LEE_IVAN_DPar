@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu]
+[CreateAssetMenu(fileName = "ShipDatabase", menuName = "Player Ships/ShipDatabase")]
 public class ShipDatabase : ScriptableObject
 {
     public ShipSelect[] ship;

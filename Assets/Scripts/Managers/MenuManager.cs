@@ -2,7 +2,6 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
@@ -24,11 +23,13 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private GameObject gameOverMenu;
     [SerializeField] private GameObject shopMenu;
+    [SerializeField] private GameObject rewardsMenu;
 
     [Header("Main Menu Buttons")]
     [SerializeField] private Button mm_PlayButton;
     [SerializeField] private Button mm_SettingsButton;
     [SerializeField] private Button mm_ShopButton;
+    [SerializeField] private Button mm_RewardsButton;
     [SerializeField] private Button mm_QuitButton;
 
     [Header("Pause Menu Buttons")]
@@ -46,6 +47,9 @@ public class MenuManager : MonoBehaviour
 
     [Header("Shop Menu Buttons")]
     [SerializeField] private Button sh_CloseButton;
+
+    [Header("Rewards Menu Buttons")]
+    [SerializeField] private Button re_CloseButton;
 
     [Header("Reset Button")]
     [SerializeField] private Button resetButton;
@@ -120,6 +124,7 @@ public class MenuManager : MonoBehaviour
         mm_PlayButton.onClick.AddListener(PlayGame);
         mm_SettingsButton.onClick.AddListener(ActivateSettingsMenu);
         mm_ShopButton.onClick.AddListener(ActivateShopMenu);
+        mm_RewardsButton.onClick.AddListener(ActivateRewardsMenu);
         mm_QuitButton.onClick.AddListener(QuitGame);
 
         pm_ResumeButton.onClick.AddListener(ResumeGame);
@@ -133,6 +138,8 @@ public class MenuManager : MonoBehaviour
         go_QuitButton.onClick.AddListener(QuitGame);
 
         sh_CloseButton.onClick.AddListener(CloseShop);
+
+        re_CloseButton.onClick.AddListener(CloseRewards);
 
         resetButton.onClick.AddListener(ResetPlayerPrefs);
 
@@ -177,6 +184,7 @@ public class MenuManager : MonoBehaviour
         settingsMenu.SetActive(false);
         pauseMenu.SetActive(false);
         shopMenu.SetActive(false);
+        rewardsMenu.SetActive(false);
         hud.SetActive(false);
     }
 
@@ -185,6 +193,7 @@ public class MenuManager : MonoBehaviour
         mainMenu.SetActive(true);
         settingsMenu.SetActive(false);
         shopMenu.SetActive(false);
+        rewardsMenu.SetActive(false);
         pauseMenu.SetActive(false);
     }
 
@@ -216,6 +225,15 @@ public class MenuManager : MonoBehaviour
         }
     }
 
+    private void ActivateRewardsMenu()
+    {
+        if (mainMenu.activeSelf)
+        {
+            lastActiveMenu = mainMenu;
+            ToggleMenu(mainMenu, rewardsMenu);
+        }
+    }
+
     private void Close()
     {
         if (settingsMenu.activeSelf && lastActiveMenu != null)
@@ -229,6 +247,14 @@ public class MenuManager : MonoBehaviour
         if (shopMenu.activeSelf && lastActiveMenu != null)
         {
             ToggleMenu(shopMenu, lastActiveMenu);
+        }
+    }
+
+    private void CloseRewards()
+    {
+        if (rewardsMenu.activeSelf && lastActiveMenu != null)
+        {
+            ToggleMenu(rewardsMenu, lastActiveMenu);
         }
     }
 

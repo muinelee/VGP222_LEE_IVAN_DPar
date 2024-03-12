@@ -6,11 +6,11 @@ using System.Collections;
 
 public class ShipManager : MonoBehaviour
 {
-    public ShipDatabase shipDB;
-    public TMP_Text shipName, shipCost;
-    public Image shipImage;
-    public Button purchaseButton;
-    public TMP_Text purchaseNotificationText;
+    [SerializeField] private ShipDatabase shipDB;
+    [SerializeField] private TMP_Text shipName, shipCost;
+    [SerializeField] private Image shipImage;
+    [SerializeField] private Button purchaseButton;
+    [SerializeField] private TMP_Text purchaseNotificationText;
 
     [SerializeField] private PlayerCreditsManager playerCredits;
 
