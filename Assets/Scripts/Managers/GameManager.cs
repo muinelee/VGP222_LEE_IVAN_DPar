@@ -123,12 +123,9 @@ public class GameManager : Singleton<GameManager>
         CheckForHighScore();
 
         int creditsToAdd = CalculateCreditsBasedOnScore(Score);
-        PlayerCreditsManager playerCreditsManager = FindObjectOfType<PlayerCreditsManager>();
-        if (playerCreditsManager != null)
-        {
-            playerCreditsManager.AddCredits(creditsToAdd);
-            mm.UpdateCreditsEarnedDisplay(creditsToAdd);
-        }
+        PlayerCreditsManager.Instance?.AddCredits(creditsToAdd);
+        mm.UpdateCreditsEarnedDisplay(creditsToAdd);
+        
         OnGameStateChanged?.Invoke();
     }
 

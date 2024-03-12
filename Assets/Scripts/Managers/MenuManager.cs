@@ -5,6 +5,8 @@ using TMPro;
 
 public class MenuManager : MonoBehaviour
 {
+    public static MenuManager Instance { get; private set; }
+
     [Header("References")]
     [SerializeField] private ShipManager shipManager;
 
@@ -70,6 +72,19 @@ public class MenuManager : MonoBehaviour
     private GameObject lastActiveMenu;
 
     #region Unity Methods
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     private void Start()
     {
         int highScore = PlayerPrefs.GetInt("HighScore", 0);
@@ -185,6 +200,7 @@ public class MenuManager : MonoBehaviour
         pauseMenu.SetActive(false);
         shopMenu.SetActive(false);
         rewardsMenu.SetActive(false);
+        gameOverMenu.SetActive(false);
         hud.SetActive(false);
     }
 
@@ -192,9 +208,10 @@ public class MenuManager : MonoBehaviour
     {
         mainMenu.SetActive(true);
         settingsMenu.SetActive(false);
+        pauseMenu.SetActive(false);
         shopMenu.SetActive(false);
         rewardsMenu.SetActive(false);
-        pauseMenu.SetActive(false);
+        gameOverMenu.SetActive(false);
     }
 
     private void ActivateSettingsMenu()
@@ -343,6 +360,11 @@ public class MenuManager : MonoBehaviour
     private void ResetPlayerPrefs()
     {
         PlayerPrefs.DeleteAll();
+        SaveLoadManager saveLoadManager = FindObjectOfType<SaveLoadManager>();
+        if (saveLoadManager != null)
+        {
+            saveLoadManager.ResetCredits();
+        }
     }
 
     private void QuitGame()

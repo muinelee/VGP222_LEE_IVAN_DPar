@@ -7,6 +7,8 @@ using System;
 
 public class DailyRewards : MonoBehaviour
 {
+    private static DailyRewards Instance = null;
+
     [SerializeField] private RewardsDatabase rewardsDB;
     [SerializeField] private TMP_Text rewardsName;
     [SerializeField] private Image rewardsImage;
@@ -27,7 +29,19 @@ public class DailyRewards : MonoBehaviour
 
     private void Awake()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else if (Instance != this)
+        {
+            Destroy(gameObject);
+        }
+
         rewardFrequency = TimeSpan.FromSeconds(rewardFrequencyInSeconds);
+        LoadRewardState();
+        CheckRewardAvailability();
     }
 
     private void Start()
@@ -85,8 +99,19 @@ public class DailyRewards : MonoBehaviour
     private void LoadRewardState()
     {
         rewardIndex = PlayerPrefs.GetInt(RewardIndexKey, 0);
-        lastRewardClaimTime = DateTime.Parse(PlayerPrefs.GetString(LastRewardClaimTimeKey, DateTime.UtcNow.ToString()));
-        nextRewardTime = DateTime.Parse(PlayerPrefs.GetString(NextRewardTimeKey, DateTime.UtcNow.Add(rewardFrequency).ToString()));
+
+        string lastRewardClaimTimeStr = PlayerPrefs.GetString(LastRewardClaimTimeKey, null);
+        if (!string.IsNullOrEmpty(lastRewardClaimTimeStr))
+        {
+            lastRewardClaimTime = DateTime.Parse(lastRewardClaimTimeStr);
+            nextRewardTime = DateTime.Parse(PlayerPrefs.GetString(NextRewardTimeKey));
+        }
+        else
+        {
+            lastRewardClaimTime = DateTime.UtcNow;
+            nextRewardTime = lastRewardClaimTime.Add(rewardFrequency);
+            SaveRewardState();
+        }
     }
 
     private void SaveRewardState()
