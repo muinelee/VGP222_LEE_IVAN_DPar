@@ -14,6 +14,7 @@ public class DailyRewards : MonoBehaviour
     [SerializeField] private GameObject rewardsNotification;
     [SerializeField] private PlayerCreditsManager playerCreditsManager;
     [SerializeField] private float rewardFrequencyInSeconds = 10f;
+    private bool isRewardAvailable;
 
     private DateTime nextRewardTime;
     private DateTime lastRewardClaimTime;
@@ -31,9 +32,10 @@ public class DailyRewards : MonoBehaviour
 
     private void Start()
     {
+        rewardsNotification.SetActive(true);
         claimButton.onClick.AddListener(ClaimReward);
         LoadRewardState();
-        InitializeNotification();
+        CheckRewardAvailability();
         UpdateRewardUI();
     }
 
@@ -51,18 +53,12 @@ public class DailyRewards : MonoBehaviour
         }
     }
 
-    private void InitializeNotification()
+    private void CheckRewardAvailability()
     {
-        if (DateTime.UtcNow > nextRewardTime)
-        {
-            rewardsNotification.SetActive(true);
-            claimButton.interactable = true;
-        }
-        else
-        {
-            rewardsNotification.SetActive(false);
-            claimButton.interactable = false;
-        }
+        isRewardAvailable = DateTime.UtcNow > nextRewardTime;
+
+        rewardsNotification.SetActive(isRewardAvailable);
+        claimButton.interactable = isRewardAvailable;
     }
 
     private void ClaimReward()
@@ -74,6 +70,7 @@ public class DailyRewards : MonoBehaviour
         rewardIndex = (rewardIndex + 1) % rewardsDB.rewardCount;
         lastRewardClaimTime = DateTime.UtcNow;
         nextRewardTime = lastRewardClaimTime.Add(rewardFrequency);
+        isRewardAvailable = false;
         SaveRewardState();
         UpdateRewardUI();
     }
