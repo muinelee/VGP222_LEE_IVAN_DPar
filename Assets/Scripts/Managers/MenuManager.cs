@@ -197,9 +197,9 @@ public class MenuManager : MonoBehaviour
     {
         mainMenu.SetActive(false);
         settingsMenu.SetActive(false);
-        pauseMenu.SetActive(false);
         shopMenu.SetActive(false);
         rewardsMenu.SetActive(false);
+        pauseMenu.SetActive(false);
         gameOverMenu.SetActive(false);
         hud.SetActive(false);
     }
@@ -208,10 +208,11 @@ public class MenuManager : MonoBehaviour
     {
         mainMenu.SetActive(true);
         settingsMenu.SetActive(false);
-        pauseMenu.SetActive(false);
         shopMenu.SetActive(false);
         rewardsMenu.SetActive(false);
+        pauseMenu.SetActive(false);
         gameOverMenu.SetActive(false);
+        hud.SetActive(false);
     }
 
     private void ActivateSettingsMenu()
@@ -348,7 +349,7 @@ public class MenuManager : MonoBehaviour
 
     public void UpdateCreditsEarnedDisplay(int creditsEarned)
     {
-        go_CreditsEarned.text = "CREDITS EARNED:\n" + creditsEarned.ToString();
+        go_CreditsEarned.text = "+" + creditsEarned.ToString();
     }
 
     private void UpdateTimeDisplay(float elapsedTime)
